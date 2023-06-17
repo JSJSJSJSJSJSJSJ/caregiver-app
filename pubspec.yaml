@@ -1,0 +1,44 @@
+name: caregiver_app
+description: A new Flutter project.
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.6 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  carousel_slider: ^4.2.1
+  flutter_svg: ^2.0.5
+  cupertino_icons: ^1.0.2
+  cloud_firestore: ^4.8.1
+  firebase_core: ^2.14.0
+  firebase_auth: ^4.6.3
+  firebase_database: ^10.2.3
+  firebase_storage: ^11.2.3
+  fluttericon: ^2.0.0
+  google_fonts: ^4.0.0
+  google_nav_bar: ^5.0.6
+  icon: ^2.2.1
+  image_picker: ^0.8.5+3
+  intl: ^0.17.0
+  introduction_screen: ^3.0.2
+  shared_preferences: ^2.0.15
+  tabler_icons: ^0.0.3
+  typicons_flutter: ^0.5.0
+  url_launcher: ^6.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/
+    - assets/images/
+    - assets/icons/
