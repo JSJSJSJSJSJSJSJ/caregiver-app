@@ -15,11 +15,12 @@ class ChatRoom extends StatefulWidget {
   final String profileUrl;
 
   ChatRoom(
-      {Key? key,
-      required this.user2Id,
-      required this.user2Name,
-      required this.profileUrl})
-      : super(key: key);
+      {
+        Key? key,
+        required this.user2Id,
+        required this.user2Name,
+        required this.profileUrl
+      }) : super(key: key);
 
   @override
   State<ChatRoom> createState() => _ChatRoomState();

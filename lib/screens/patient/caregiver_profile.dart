@@ -9,6 +9,7 @@ class CaregiverProfile extends StatefulWidget {
   String? caregiver = "P";
 
   CaregiverProfile({Key? key, this.caregiver}) : super(key: key);
+
   @override
   State<CaregiverProfile> createState() => _CaregiverProfileState();
 }
@@ -70,8 +71,7 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
 
                         // caregiver profile pic
                         CircleAvatar(
-                          backgroundImage:
-                              NetworkImage(document['profilePhoto'] ?? ''),
+                          backgroundImage: NetworkImage(document['profilePhoto'] ?? ''),
                           backgroundColor: Colors.lightBlue[100],
                           radius: 80,
                         ),
@@ -116,7 +116,7 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
                           padding: const EdgeInsets.only(left: 22, right: 22),
                           alignment: Alignment.center,
                           child: Text(
-                            document['specification'] ?? '-',
+                            document['expertise'] ?? '-',
                             textAlign: TextAlign.center,
                             style: GoogleFonts.lato(
                               fontSize: 14,

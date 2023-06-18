@@ -19,7 +19,7 @@ class _ExploreListState extends State<ExploreList> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text(
-          '${widget.type}s',
+          widget.type,
           style: GoogleFonts.lato(
             color: Colors.black,
             fontSize: 20,
@@ -80,8 +80,7 @@ class _ExploreListState extends State<ExploreList> {
                           //mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(caregiver['profilePhoto']),
+                              backgroundImage: NetworkImage(caregiver['profilePhoto']),
                               backgroundColor: Colors.blue,
                               radius: 25,
                             ),

@@ -107,7 +107,7 @@ class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
                                 ),
                                 // reason
                                 Text(
-                                    document['description'] ?? '没有描述')
+                                    document['description'] ?? '未填写')
                               ],
                             ),
                           ),

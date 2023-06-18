@@ -26,16 +26,12 @@ class _ChatsState extends State<Chats> {
     chatDao = ChatDao(user.uid);
   }
 
-  Future<void> _initializeUserAndChatDao() async {
-    await _getUser();
-    await _set();
-    setState(() {});
-  }
-
   @override
   void initState() {
     super.initState();
-    _initializeUserAndChatDao();
+    _getUser();
+    _set();
+    setState(() {});
   }
 
   @override

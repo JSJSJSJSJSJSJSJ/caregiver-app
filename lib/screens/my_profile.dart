@@ -224,7 +224,7 @@ class _MyProfileState extends State<MyProfile> {
                           width: 10,
                         ),
                         Text(
-                          phone ?? 'Not Added',
+                          phone ?? '未添加',
                           style: GoogleFonts.lato(
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -268,7 +268,7 @@ class _MyProfileState extends State<MyProfile> {
                           width: 10,
                         ),
                         Text(
-                          'Bio',
+                          '自我描述',
                           style: GoogleFonts.lato(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

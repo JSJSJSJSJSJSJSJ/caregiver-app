@@ -186,7 +186,7 @@ class _AppointmentListState extends State<AppointmentList> {
                               // Today label
                               Text(
                                 _compareDate(
-                                        document['date'].toDate().toString())
+                                    document['date'].toDate().toString())
                                     ? "今天"
                                     : "",
                                 style: GoogleFonts.lato(

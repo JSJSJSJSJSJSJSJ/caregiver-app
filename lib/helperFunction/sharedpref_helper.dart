@@ -50,5 +50,4 @@ final String _profileUrlKey = "PROFILEURLKEY";
     return prefs.getString(_profileUrlKey);
   }
 
-
 }

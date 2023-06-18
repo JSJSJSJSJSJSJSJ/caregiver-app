@@ -196,27 +196,27 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                   ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 23, bottom: 10),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      "让我们来照顾你",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.lato(
-                          color: Colors.blue[800],
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: const Carouselslider(),
-                  ),
+                  // Container(
+                  //   padding: const EdgeInsets.only(left: 23, bottom: 10),
+                  //   alignment: Alignment.centerLeft,
+                  //   child: Text(
+                  //     "类别",
+                  //     textAlign: TextAlign.center,
+                  //     style: GoogleFonts.lato(
+                  //         color: Colors.blue[800],
+                  //         fontWeight: FontWeight.bold,
+                  //         fontSize: 18),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width,
+                  //   child: const Carouselslider(),
+                  // ),
                   Container(
                     padding: const EdgeInsets.only(left: 20),
                     alignment: Alignment.centerLeft,
                     child: Text(
-                      "专家",
+                      "快速查找",
                       textAlign: TextAlign.center,
                       style: GoogleFonts.lato(
                           color: Colors.blue[800],
@@ -224,49 +224,37 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 18),
                     ),
                   ),
-                  Container(
-                    height: 150,
-                    padding: const EdgeInsets.only(top: 14),
-                    child: ListView.builder(
-                      physics: const ClampingScrollPhysics(),
-                      scrollDirection: Axis.horizontal,
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      itemCount: cards.length,
-                      itemBuilder: (context, index) {
-                        //print("images path: ${cards[index].cardImage.toString()}");
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: cards.map((card) {
                         return Container(
                           margin: const EdgeInsets.only(right: 14),
                           height: 150,
                           width: 140,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color(cards[index].cardBackground),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.shade400,
-                                  blurRadius: 4.0,
-                                  spreadRadius: 0.0,
-                                  offset: const Offset(3, 3),
-                                ),
-                              ]
-                              // image: DecorationImage(
-                              //   image: AssetImage(cards[index].cardImage),
-                              //   fit: BoxFit.fill,
-                              // ),
+                            borderRadius: BorderRadius.circular(20),
+                            color: Color(card.cardBackground),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade400,
+                                blurRadius: 4.0,
+                                spreadRadius: 0.0,
+                                offset: const Offset(3, 3),
                               ),
+                            ],
+                          ),
                           child: TextButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => ExploreList(
-                                          type: cards[index].caregiver,
-                                        )),
+                                  builder: (context) => ExploreList(type: card.caregiver),
+                                ),
                               );
                             },
                             style: ButtonStyle(
-                              shape: MaterialStateProperty.all<
-                                  RoundedRectangleBorder>(
+                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
                                 ),
@@ -275,37 +263,117 @@ class _HomePageState extends State<HomePage> {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const SizedBox(
-                                  height: 16,
-                                ),
+                                const SizedBox(height: 16),
                                 CircleAvatar(
-                                    backgroundColor: Colors.white,
-                                    radius: 29,
-                                    child: Icon(
-                                      cards[index].cardIcon,
-                                      size: 26,
-                                      color: Color(cards[index].cardBackground),
-                                    )),
-                                const SizedBox(
-                                  height: 10,
+                                  backgroundColor: Colors.white,
+                                  radius: 29,
+                                  child: Icon(
+                                    card.cardIcon,
+                                    size: 26,
+                                    color: Color(card.cardBackground),
+                                  ),
                                 ),
+                                const SizedBox(height: 10),
                                 Container(
                                   alignment: Alignment.bottomCenter,
                                   child: Text(
-                                    cards[index].caregiver,
+                                    card.caregiver,
                                     style: GoogleFonts.lato(
-                                        color: Colors.white,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w600),
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                               ],
                             ),
                           ),
                         );
-                      },
+                      }).toList(),
                     ),
                   ),
+                  // Container(
+                  //   height: 150,
+                  //   padding: const EdgeInsets.only(top: 14),
+                  //   child: ListView.builder(
+                  //     physics: const ClampingScrollPhysics(),
+                  //     scrollDirection: Axis.horizontal,
+                  //     padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  //     itemCount: cards.length,
+                  //     itemBuilder: (context, index) {
+                  //       //print("images path: ${cards[index].cardImage.toString()}");
+                  //       return Container(
+                  //         margin: const EdgeInsets.only(right: 14),
+                  //         height: 150,
+                  //         width: 140,
+                  //         decoration: BoxDecoration(
+                  //             borderRadius: BorderRadius.circular(20),
+                  //             color: Color(cards[index].cardBackground),
+                  //             boxShadow: [
+                  //               BoxShadow(
+                  //                 color: Colors.grey.shade400,
+                  //                 blurRadius: 4.0,
+                  //                 spreadRadius: 0.0,
+                  //                 offset: const Offset(3, 3),
+                  //               ),
+                  //             ]
+                  //             // image: DecorationImage(
+                  //             //   image: AssetImage(cards[index].cardImage),
+                  //             //   fit: BoxFit.fill,
+                  //             // ),
+                  //             ),
+                  //         child: TextButton(
+                  //           onPressed: () {
+                  //             Navigator.push(
+                  //               context,
+                  //               MaterialPageRoute(
+                  //                   builder: (context) => ExploreList(
+                  //                         type: cards[index].caregiver,
+                  //                       )),
+                  //             );
+                  //           },
+                  //           style: ButtonStyle(
+                  //             shape: MaterialStateProperty.all<
+                  //                 RoundedRectangleBorder>(
+                  //               RoundedRectangleBorder(
+                  //                 borderRadius: BorderRadius.circular(20),
+                  //               ),
+                  //             ),
+                  //           ),
+                  //           child: Column(
+                  //             mainAxisAlignment: MainAxisAlignment.center,
+                  //             children: [
+                  //               const SizedBox(
+                  //                 height: 16,
+                  //               ),
+                  //               CircleAvatar(
+                  //                   backgroundColor: Colors.white,
+                  //                   radius: 29,
+                  //                   child: Icon(
+                  //                     cards[index].cardIcon,
+                  //                     size: 26,
+                  //                     color: Color(cards[index].cardBackground),
+                  //                   )),
+                  //               const SizedBox(
+                  //                 height: 10,
+                  //               ),
+                  //               Container(
+                  //                 alignment: Alignment.bottomCenter,
+                  //                 child: Text(
+                  //                   cards[index].caregiver,
+                  //                   style: GoogleFonts.lato(
+                  //                       color: Colors.white,
+                  //                       fontSize: 16,
+                  //                       fontWeight: FontWeight.w600),
+                  //                 ),
+                  //               ),
+                  //             ],
+                  //           ),
+                  //         ),
+                  //       );
+                  //     },
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 30,
                   ),

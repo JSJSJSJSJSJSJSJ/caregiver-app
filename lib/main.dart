@@ -57,10 +57,6 @@ class _MyAppState extends State<MyApp> {
       },
       theme: ThemeData(brightness: Brightness.light),
       debugShowCheckedModeBanner: false,
-      // home: MainPageCaregiver(),
-      // home: ChatRoom(
-      //   userId: '1234',
-      // ),
     );
   }
 }

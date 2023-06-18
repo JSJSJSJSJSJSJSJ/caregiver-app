@@ -511,7 +511,7 @@ class _RegisterState extends State<Register> {
       }
       await user.updateDisplayName(_displayName.text);
 
-      String name = (type == 0) ? 'Caregiver. ${_displayName.text}' : _displayName.text;
+      String name = (type == 0) ? 'CG.${_displayName.text}' : _displayName.text;
       String accountType = (type == 0) ? 'caregiver' : 'patient';
       String userId = user.uid;
 
@@ -541,17 +541,14 @@ class _RegisterState extends State<Register> {
         mp.addAll({
           'openHour': "09:00",
           'closeHour': "21:00",
-          'rating': double.parse(
-              (3 + Random().nextDouble() * 1.9).toStringAsPrecision(2)),
-          'specification': null,
+          'rating': double.parse((3 + Random().nextDouble() * 1.9).toStringAsPrecision(2)),
+          'expertise': null,
           'specialization': 'general',
         });
         globals.isCaregiver = true;
       }
-
       // sep
       await FirebaseFirestore.instance.collection(accountType).doc(user.uid).set(mp);
-
       Navigator.of(context).pushNamedAndRemoveUntil('/home', (Route<dynamic> route) => false);
     } else {}
   }

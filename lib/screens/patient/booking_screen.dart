@@ -166,7 +166,7 @@ class _BookingScreenState extends State<BookingScreen> {
             shrinkWrap: true,
             children: [
               const Image(
-                image: AssetImage('assets/appointment.jpg'),
+                image: AssetImage('assets/images/appointment.jpg'),
                 height: 250,
               ),
               const SizedBox(

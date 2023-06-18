@@ -91,8 +91,7 @@ class _SearchListState extends State<SearchList> {
                                   //mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
                                     CircleAvatar(
-                                      backgroundImage:
-                                          NetworkImage(caregiver['profilePhoto']),
+                                      backgroundImage: NetworkImage(caregiver['profilePhoto']),
                                       backgroundColor: Colors.blue,
                                       radius: 25,
                                     ),
