@@ -62,7 +62,7 @@ class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
             }
             return snapshot.data!.size == 0
                 ? Text(
-                    '在这里查看护理历史...',
+                    '在这里查看护理预约历史...',
                     style: GoogleFonts.lato(
                       color: Colors.grey,
                       fontSize: 18,
@@ -97,7 +97,6 @@ class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
                                     fontSize: 15,
                                   ),
                                 ),
-                                // date
                                 Text(
                                   _dateFormatter(
                                       document['date'].toDate().toString()),
@@ -105,7 +104,6 @@ class _AppointmentHistoryListState extends State<AppointmentHistoryList> {
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                // reason
                                 Text(
                                     document['description'] ?? '未填写')
                               ],

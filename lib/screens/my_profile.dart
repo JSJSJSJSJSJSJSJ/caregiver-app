@@ -45,7 +45,7 @@ class _MyProfileState extends State<MyProfile> {
       name = snapshot['name'];
       phone = snapshot['phone'];
       bio = snapshot['bio'];
-      image = snapshot['profilePhoto'] ?? image;
+      image = snapshot['profilePhoto'];
       specialization = snapshot['specialization'];
     });
     print(snap.data());
@@ -157,7 +157,7 @@ class _MyProfileState extends State<MyProfile> {
                 height: 20,
               ),
 
-              // user basic info
+              // 邮箱和电话号码
               Container(
                 margin: const EdgeInsets.only(left: 15, right: 15),
                 padding: const EdgeInsets.only(left: 20),
@@ -236,8 +236,7 @@ class _MyProfileState extends State<MyProfile> {
                   ],
                 ),
               ),
-
-              // user bio
+              // 自我描述
               Container(
                 margin: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 padding: const EdgeInsets.only(left: 20, top: 20),
@@ -278,23 +277,24 @@ class _MyProfileState extends State<MyProfile> {
                       ],
                     ),
                     // bio
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: const EdgeInsets.only(top: 10, left: 40),
-                      child: Text(
-                        bio ?? '未填写',
-                        style: GoogleFonts.lato(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black38,
-                        ),
-                      ),
+                    Expanded(
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(top: 10, left: 40),
+                          child: Text(
+                            bio ?? '未填写',
+                            style: GoogleFonts.lato(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black38,
+                            ),
+                          ),
+                        )
                     )
                   ],
                 ),
               ),
-
-              // Appointment history
+              // 护理预约历史
               Container(
                 margin: const EdgeInsets.only(left: 15, right: 15, top: 20),
                 padding: const EdgeInsets.only(left: 20, top: 20),
@@ -325,7 +325,7 @@ class _MyProfileState extends State<MyProfile> {
                           width: 10,
                         ),
                         Text(
-                          "护理历史",
+                          "护理预约历史",
                           style: GoogleFonts.lato(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
@@ -380,12 +380,10 @@ class _MyProfileState extends State<MyProfile> {
 
   // for picking image from device
   Future selectOrTakePhoto(ImageSource imageSource) async {
-    XFile? file =
-        await ImagePicker().pickImage(source: imageSource, imageQuality: 12);
-
+    XFile? file = await ImagePicker().pickImage(source: imageSource, imageQuality: 12);
     if (file != null) {
       var im = await file.readAsBytes();
-      // upload image to cloud
+      // 上传至firebase的storage
       await uploadFile(im, file.name);
       return;
     }
@@ -407,13 +405,13 @@ class _MyProfileState extends State<MyProfile> {
                 Navigator.pop(context);
               },
             ),
-            SimpleDialogOption(
-              child: const Text('拍照'),
-              onPressed: () {
-                selectOrTakePhoto(ImageSource.camera);
-                Navigator.pop(context);
-              },
-            ),
+            // SimpleDialogOption(
+            //   child: const Text('拍照'),
+            //   onPressed: () {
+            //     selectOrTakePhoto(ImageSource.camera);
+            //     Navigator.pop(context);
+            //   },
+            // ),
           ],
         );
       },
@@ -422,16 +420,13 @@ class _MyProfileState extends State<MyProfile> {
 
   // upload image
   Future uploadFile(Uint8List img, String fileName) async {
-    final destination = 'dp/${user.displayName}-$fileName';
+    final destination = '/pp/${user.displayName}-$fileName';
     try {
       final ref = storage.ref(destination);
-
       UploadTask uploadTask = ref.putData(img);
       TaskSnapshot snapshot = await uploadTask;
-
       String downloadUrl = await snapshot.ref.getDownloadURL();
       print('image url : $downloadUrl');
-
       setState(() {
         image = Uri.decodeFull(downloadUrl.toString());
       });
@@ -446,7 +441,6 @@ class _MyProfileState extends State<MyProfile> {
       FirebaseFirestore.instance.collection('users').doc(user.uid).set({
         'profilePhoto': downloadUrl,
       }, SetOptions(merge: true));
-
       print("上传成功 !!!");
     } catch (e) {
       print(e.toString());

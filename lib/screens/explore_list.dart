@@ -36,8 +36,9 @@ class _ExploreListState extends State<ExploreList> {
           stream: FirebaseFirestore.instance
               .collection('caregiver')
               .orderBy('specialization')
-              .startAt([widget.type]).endAt(
-                  ['${widget.type}\uf8ff']).snapshots(),
+              .where('specialization', isEqualTo: widget.type)
+              // .startAt([widget.type]).endAt(['${widget.type}\uf8ff']),
+              .snapshots(),
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (!snapshot.hasData) {

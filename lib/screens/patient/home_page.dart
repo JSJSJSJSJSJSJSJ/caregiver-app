@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 20, bottom: 25),
                     child: Text(
-                      "让我们找到你的 \n护工",
+                      "让我们找到帮你的 \n护工",
                       style: GoogleFonts.lato(
                         fontSize: 35,
                         fontWeight: FontWeight.bold,

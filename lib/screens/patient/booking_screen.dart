@@ -186,7 +186,7 @@ class _BookingScreenState extends State<BookingScreen> {
                         alignment: Alignment.centerLeft,
                         padding: const EdgeInsets.only(left: 16),
                         child: Text(
-                          '输入病人病情',
+                          '预约信息',
                           style: GoogleFonts.lato(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

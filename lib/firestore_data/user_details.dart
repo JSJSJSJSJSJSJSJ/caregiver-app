@@ -18,8 +18,20 @@ class _UserDetailsState extends State<UserDetails> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   late User user;
 
-  // map of all the details
+  // 用户信息集合
   Map<String, dynamic> details = {};
+
+  List<String> keyOrder = [
+    'name',
+    'bio',
+    'type',
+    'email',
+    'address',
+    'phone',
+    'profilePhoto',
+    'birthDate',
+    'id',
+  ];
 
   Future<void> _getUser() async {
     user = _auth.currentUser!;
@@ -29,10 +41,22 @@ class _UserDetailsState extends State<UserDetails> {
         .doc(user.uid)
         .get();
 
+    // setState(() {
+    //   details = snap.data() as Map<String, dynamic>;
+    //   details = Map.fromEntries(details.entries.toList()..sort((a, b) => keyOrder.indexOf(a.key).compareTo(keyOrder.indexOf(b.key))));
+    // });
+    // // 输出拿到的user信息
+    // print(snap.data());
+
+    Map<String, dynamic> newDetails = snap.data() as Map<String, dynamic>;
+
     setState(() {
-      details = snap.data() as Map<String, dynamic>;
+      details = Map.fromEntries(details.entries.toList()..sort((a, b) => keyOrder.indexOf(a.key).compareTo(keyOrder.indexOf(b.key))));
+      details.addAll(newDetails);
     });
-    print(snap.data());
+
+    // 输出完整的用户信息
+    print(details);
   }
 
   @override
@@ -51,8 +75,7 @@ class _UserDetailsState extends State<UserDetails> {
         itemCount: details.length,
         itemBuilder: (context, index) {
           String key = details.keys.elementAt(index);
-          String value =
-              details[key] == null ? 'Not Added' : details[key].toString();
+          String value = details[key] == null ? 'Not Added' : details[key].toString();
           String label = key[0].toUpperCase() + key.substring(1);
 
           return Container(
@@ -71,7 +94,7 @@ class _UserDetailsState extends State<UserDetails> {
                     ),
                   ),
                 ).then((value) {
-                  // reload page
+                  // 重新获取用户数据
                   _getUser();
                   setState(() {});
                 });
