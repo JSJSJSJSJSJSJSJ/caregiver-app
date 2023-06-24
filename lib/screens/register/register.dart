@@ -534,7 +534,7 @@ class _RegisterState extends State<Register> {
         'phone': null,
         'bio': null,
         'address': null,
-        'profilePhoto': type == 0 ? "https://firebasestorage.googleapis.com/v0/b/caregiver-754a6.appspot.com/o/caregiver_default.png?alt=media&token=ddf5a4f9-60cd-4412-9012-8d3325a1f316" : "https://firebasestorage.googleapis.com/v0/b/caregiver-754a6.appspot.com/o/patient_default.png?alt=media&token=6f115eab-0f98-40f9-8e5a-cc43ba57c4bf",
+        'profilePhoto': type == 0 ? "https://firebasestorage.googleapis.com/v0/b/caregiver-754a6.appspot.com/o/caregiver_default.png?alt=media&token=ddf5a4f9-60cd-4412-9012-8d3325a1f316" : "https://firebasestorage.googleapis.com/v0/b/caregiver-754a6.appspot.com/o/user_default.png?alt=media&token=6f115eab-0f98-40f9-8e5a-cc43ba57c4bf",
       };
       // if (type == 0) {
       //   mp.addAll({

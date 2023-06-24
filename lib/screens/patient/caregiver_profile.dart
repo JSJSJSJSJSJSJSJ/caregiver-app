@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -20,6 +21,7 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
     String url = "tel:$phoneNumber";
     launch(url);
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +72,24 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
                         ),
 
                         // caregiver profile pic
-                        CircleAvatar(
-                          backgroundImage: NetworkImage(document['profilePhoto'] ?? ''),
-                          backgroundColor: Colors.lightBlue[100],
-                          radius: 80,
+                        // CircleAvatar(
+                        //   backgroundImage: NetworkImage(document['profilePhoto'] ?? ''),
+                        //   backgroundColor: Colors.lightBlue[100],
+                        //   radius: 80,
+                        // ),
+                        CachedNetworkImage(
+                          imageUrl: document['profilePhoto'],
+                          imageBuilder: (context, imageProvider) => CircleAvatar(
+                            backgroundImage: imageProvider,
+                            backgroundColor: Colors.blue,
+                            radius: 80,
+                          ),
+                          placeholder: (context, url) => CircularProgressIndicator(),
+                          errorWidget: (context, url, error) => CircleAvatar(
+                            backgroundImage: AssetImage('assets/images/caregiver_default.png'), // 替代的错误图片路径
+                            backgroundColor: Colors.blue,
+                            radius: 80,
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
@@ -202,7 +218,7 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
                               const Icon(Icons.access_time_rounded),
                               const SizedBox(width: 20),
                               Text(
-                                'Working Hours',
+                                '工作时间',
                                 style: GoogleFonts.lato(
                                   fontSize: 16,
                                 ),
@@ -221,7 +237,7 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
                           child: Row(
                             children: [
                               Text(
-                                'Today: ',
+                                '今天: ',
                                 style: GoogleFonts.lato(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -252,9 +268,7 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
                           width: MediaQuery.of(context).size.width,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              elevation: 2,
-                              primary: Colors.indigo.withOpacity(0.9),
-                              onPrimary: Colors.black,
+                              foregroundColor: Colors.black, backgroundColor: Colors.indigo.withOpacity(0.9), elevation: 2,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(32.0),
                               ),
@@ -271,7 +285,7 @@ class _CaregiverProfileState extends State<CaregiverProfile> {
                               );
                             },
                             child: Text(
-                              'Book an Appointment',
+                              '预定一次护理',
                               style: GoogleFonts.lato(
                                 color: Colors.white,
                                 fontSize: 16,

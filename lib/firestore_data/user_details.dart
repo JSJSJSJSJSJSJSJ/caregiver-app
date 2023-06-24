@@ -24,13 +24,10 @@ class _UserDetailsState extends State<UserDetails> {
   List<String> keyOrder = [
     'name',
     'bio',
-    'type',
     'email',
     'address',
     'phone',
-    'profilePhoto',
     'birthDate',
-    'id',
   ];
 
   Future<void> _getUser() async {
@@ -50,9 +47,13 @@ class _UserDetailsState extends State<UserDetails> {
 
     Map<String, dynamic> newDetails = snap.data() as Map<String, dynamic>;
 
+    // setState(() {
+    //   details = Map.fromEntries(details.entries.toList()..sort((a, b) => keyOrder.indexOf(a.key).compareTo(keyOrder.indexOf(b.key))));
+    //   details.addAll(newDetails);
+    // });
     setState(() {
+      details = Map.fromEntries(newDetails.entries.where((entry) => keyOrder.contains(entry.key)).toList());
       details = Map.fromEntries(details.entries.toList()..sort((a, b) => keyOrder.indexOf(a.key).compareTo(keyOrder.indexOf(b.key))));
-      details.addAll(newDetails);
     });
 
     // 输出完整的用户信息

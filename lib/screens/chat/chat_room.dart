@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
@@ -76,8 +77,22 @@ class _ChatRoomState extends State<ChatRoom> {
         ),
         title: Row(
           children: [
-            CircleAvatar(
-              backgroundImage: NetworkImage(widget.profileUrl),
+            // CircleAvatar(
+            //   backgroundImage: NetworkImage(widget.profileUrl),
+            // ),
+            CachedNetworkImage(
+              imageUrl: widget.profileUrl,
+              imageBuilder: (context, imageProvider) => CircleAvatar(
+                backgroundImage: imageProvider,
+                backgroundColor: Colors.blue,
+                radius: 25,
+              ),
+              placeholder: (context, url) => CircularProgressIndicator(),
+              errorWidget: (context, url, error) => CircleAvatar(
+                backgroundImage: AssetImage('assets/images/user_default.png'), // 替代的错误图片路径
+                backgroundColor: Colors.blue,
+                radius: 25,
+              ),
             ),
             const SizedBox(width: 10),
             // prevent over flow text if name is too long

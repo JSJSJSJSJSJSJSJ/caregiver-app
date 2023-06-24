@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -90,10 +91,24 @@ class _SearchListState extends State<SearchList> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   //mainAxisAlignment: MainAxisAlignment.spaceAround,
                                   children: [
-                                    CircleAvatar(
-                                      backgroundImage: NetworkImage(caregiver['profilePhoto']),
-                                      backgroundColor: Colors.blue,
-                                      radius: 25,
+                                    // CircleAvatar(
+                                    //   backgroundImage: NetworkImage(caregiver['profilePhoto']),
+                                    //   backgroundColor: Colors.blue,
+                                    //   radius: 25,
+                                    // ),
+                                    CachedNetworkImage(
+                                      imageUrl: caregiver['profilePhoto'],
+                                      imageBuilder: (context, imageProvider) => CircleAvatar(
+                                        backgroundImage: imageProvider,
+                                        backgroundColor: Colors.blue,
+                                        radius: 25,
+                                      ),
+                                      placeholder: (context, url) => CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) => CircleAvatar(
+                                        backgroundImage: AssetImage('assets/images/caregiver_default.png'), // 替代的错误图片路径
+                                        backgroundColor: Colors.blue,
+                                        radius: 25,
+                                      ),
                                     ),
                                     const SizedBox(
                                       width: 20,
